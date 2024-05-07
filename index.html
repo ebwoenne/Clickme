@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jumpscare Click Counter</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    #fullscreenVideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Click Me</h1>
+  <button onclick="incrementScore()">Click Me</button>
+  <p>Score: <span id="score">0</span></p>
+
+  <video id="fullscreenVideo" autoplay controls>
+    <source src="ba.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <script>
+    let score = 0;
+    const fullscreenVideo = document.getElementById('fullscreenVideo');
+
+    function incrementScore() {
+      score++;
+      document.getElementById('score').textContent = score;
+
+      // Randomly show the jumpscare video with a 10% chance
+      if (Math.random() < 0.1) {
+        showJumpscare();
+      }
+    }
+
+    function showJumpscare() {
+      fullscreenVideo.style.display = 'block';
+      fullscreenVideo.play();
+
+      // Hide the video after a short delay
+      setTimeout(function() {
+        fullscreenVideo.style.display = 'none';
+      }, 2000); // Adjust the delay (in milliseconds) as needed
+    }
+  </script>
+</body>
+</html>
